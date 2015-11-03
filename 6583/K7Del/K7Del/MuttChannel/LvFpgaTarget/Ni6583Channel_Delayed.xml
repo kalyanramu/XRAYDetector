@@ -1,0 +1,1639 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<CLIPDeclaration Name="NI 6583 Basic Channel with Idelay">
+  <FormatVersion>4.3</FormatVersion>
+  <CLIPVersion>14.1.0</CLIPVersion>
+  <HDLName>Ni6583Channel_Delayed</HDLName>
+  <ImplementationList>
+    <Path Name="..\Source\vhdl\Ni6583Channel_Delayed.vhd">
+      <TopLevel/>
+      <SimulationFileList>
+        <SimulationModelType>Same as synthesis</SimulationModelType>
+      </SimulationFileList>
+    </Path>
+    <Path Name="..\..\CommonFiles\Source\vhdl\Ni6583Core_Delayed.vhd">
+      <SimulationFileList>
+        <SimulationModelType>Same as synthesis</SimulationModelType>
+      </SimulationFileList>
+    </Path>
+    <Path Name="..\..\CommonFiles\Source\vhdl\Ni6583BaseS7_Delayed.vhd">
+      <SimulationFileList>
+        <SimulationModelType>Same as synthesis</SimulationModelType>
+      </SimulationFileList>
+    </Path>
+    <Path Name="..\..\..\CommonFiles\Source\vhdl\DirectionStateControl.vhd">
+      <SimulationFileList>
+        <SimulationModelType>Same as synthesis</SimulationModelType>
+      </SimulationFileList>
+    </Path>
+    <Path Name="..\..\..\CommonFiles\Source\vhdl\I2cVoltageSelect.vhd">
+      <SimulationFileList>
+        <SimulationModelType>Same as synthesis</SimulationModelType>
+      </SimulationFileList>
+    </Path>
+    <Path Name="..\..\..\CommonFiles\Source\vhdl\I2cIssueCycle.vhd">
+      <SimulationFileList>
+        <SimulationModelType>Same as synthesis</SimulationModelType>
+      </SimulationFileList>
+    </Path>
+    <Path Name="..\..\..\CommonFiles\Source\vhdl\VoltageSelectTop.vhd">
+      <SimulationFileList>
+        <SimulationModelType>Same as synthesis</SimulationModelType>
+      </SimulationFileList>
+    </Path>
+    <Path Name="..\..\..\CommonFiles\Source\vhdl\SafeBUFGCE.vhd">
+      <SimulationFileList>
+        <SimulationModelType>Same as synthesis</SimulationModelType>
+      </SimulationFileList>
+    </Path>
+    <Path Name="..\..\CommonFiles\Target\Ni6583Timing.xdc">
+      <SimulationFileList>
+        <SimulationModelType>Same as synthesis</SimulationModelType>
+      </SimulationFileList>
+    </Path>
+  </ImplementationList>
+
+  <Description>This CLIP exposes all IO as individual signals. 32 SE IO, 1 SE Clock Out, 3 SE PFI, 1 SE Strobe Input. 16 LVDS IO, 1 LVDS Clock Out, 3 LVDS PFI, 1 LVDS Strobe Input.</Description>
+
+  <TopLevelEntityAndArchitecture>
+    <SynthesisModel>
+      <Entity>Ni6583Channel</Entity>
+      <Architecture>rtl</Architecture>
+    </SynthesisModel>
+   </TopLevelEntityAndArchitecture>
+
+  <CompatibleIOModuleList>
+    <IOModule>IOModuleID:0x109374D8</IOModule>
+    <IOModule>IOModuleID:0x10937556</IOModule>
+    <IOModule>IOModuleID:0x10937557</IOModule>
+  </CompatibleIOModuleList>
+
+  <CompatibleCLIPSocketList>
+    <Socket>FlexRIO-K7IOModule</Socket>
+  </CompatibleCLIPSocketList>
+
+  <InterfaceList>
+    <Interface Name="Fabric">
+      <InterfaceType>Fabric</InterfaceType>
+      <SignalList>
+        <Signal Name="aResetSl">
+          <HDLName>aResetSl</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>reset</SignalType>
+        </Signal>
+        <Signal Name="Clock Gate">
+          <HDLName>aClkGateLv</HDLName>
+          <HDLType>std_logic</HDLType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>clock gate</SignalType>
+          <DataType><Boolean/></DataType>
+        </Signal>
+      </SignalList>
+    </Interface>
+
+    <Interface Name="LabVIEW">
+      <InterfaceType>LabVIEW</InterfaceType>
+      <SignalList>
+	  
+	    <Signal Name="Idelay Reset">
+          <HDLName>iIdelayReset</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+		
+		<Signal Name="Idelay Increment">
+          <HDLName>IdelayInc</HDLName>
+          <HDLType>std_logic_vector(31 downto 0)</HDLType>
+          <DataType><U32/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+          <RequiredClockDomain>Voltage_Control_Clock</RequiredClockDomain>
+        </Signal>
+	  
+	  <Signal Name="Idelay Tap CountCh0to12">
+          <HDLName>iDelayTapCnt1</HDLName>
+          <HDLType>std_logic_vector(63 downto 0)</HDLType>
+          <DataType><U64/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+          <RequiredClockDomain>Voltage_Control_Clock</RequiredClockDomain>
+        </Signal>
+	  
+		<Signal Name="Idelay Tap Count13to24">
+          <HDLName>iDelayTapCnt2</HDLName>
+          <HDLType>std_logic_vector(63 downto 0)</HDLType>
+          <DataType><U64/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+          <RequiredClockDomain>Voltage_Control_Clock</RequiredClockDomain>
+        </Signal>
+		
+		<Signal Name="Idelay Tap Count25to32">
+          <HDLName>iDelayTapCnt3</HDLName>
+          <HDLType>std_logic_vector(63 downto 0)</HDLType>
+          <DataType><U64/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+          <RequiredClockDomain>Voltage_Control_Clock</RequiredClockDomain>
+        </Signal>
+		
+		<Signal Name="Clock 200 MHz">
+          <HDLName>Clk200</HDLName>
+          <Datatype><Boolean/></Datatype>
+	  <HDLType>std_logic</HDLType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>clock</SignalType>
+          <FreqInHertz>
+            <Min>199M</Min>
+            <Max>201M</Max>
+          </FreqInHertz>
+          <CyclesRequiredBeforeAsynchronousResetClears>0</CyclesRequiredBeforeAsynchronousResetClears>
+        </Signal>
+	  
+
+        <Signal Name="DDC_A_Strobe">
+          <HDLName>StrobeA</HDLName>
+          <HDLType>std_logic</HDLType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>clock</SignalType>
+          <Description></Description>
+          <DataType><Boolean/></DataType>
+          <DutyCycleRange>
+            <PercentInHighMax>55.000000</PercentInHighMax>
+            <PercentInHighMin>45.000000</PercentInHighMin>
+          </DutyCycleRange>
+          <AccuracyInPPM>100.000000</AccuracyInPPM>
+          <JitterInPicoSeconds>250.000000</JitterInPicoSeconds>
+          <FreqInHertz>
+            <Max>200M</Max>
+            <Min>100</Min>
+          </FreqInHertz>
+        </Signal>
+        <Signal Name="DDC_B_Strobe">
+          <HDLName>StrobeB</HDLName>
+          <HDLType>std_logic</HDLType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>clock</SignalType>
+          <Description></Description>
+          <DataType><Boolean/></DataType>
+          <DutyCycleRange>
+            <PercentInHighMax>55.000000</PercentInHighMax>
+            <PercentInHighMin>45.000000</PercentInHighMin>
+          </DutyCycleRange>
+          <AccuracyInPPM>100.000000</AccuracyInPPM>
+          <JitterInPicoSeconds>250.000000</JitterInPicoSeconds>
+          <FreqInHertz>
+            <Max>200M</Max>
+            <Min>100</Min>
+          </FreqInHertz>
+        </Signal>
+
+        <Signal Name="SE_Ch0_Dir">
+          <HDLName>aSeDir0</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch1_Dir">
+          <HDLName>aSeDir1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch2_Dir">
+          <HDLName>aSeDir2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch3_Dir">
+          <HDLName>aSeDir3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch4_Dir">
+          <HDLName>aSeDir4</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch5_Dir">
+          <HDLName>aSeDir5</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch6_Dir">
+          <HDLName>aSeDir6</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch7_Dir">
+          <HDLName>aSeDir7</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch8_Dir">
+          <HDLName>aSeDir8</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch9_Dir">
+          <HDLName>aSeDir9</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch10_Dir">
+          <HDLName>aSeDir10</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch11_Dir">
+          <HDLName>aSeDir11</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch12_Dir">
+          <HDLName>aSeDir12</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch13_Dir">
+          <HDLName>aSeDir13</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch14_Dir">
+          <HDLName>aSeDir14</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch15_Dir">
+          <HDLName>aSeDir15</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch16_Dir">
+          <HDLName>aSeDir16</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch17_Dir">
+          <HDLName>aSeDir17</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch18_Dir">
+          <HDLName>aSeDir18</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch19_Dir">
+          <HDLName>aSeDir19</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch20_Dir">
+          <HDLName>aSeDir20</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch21_Dir">
+          <HDLName>aSeDir21</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch22_Dir">
+          <HDLName>aSeDir22</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch23_Dir">
+          <HDLName>aSeDir23</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch24_Dir">
+          <HDLName>aSeDir24</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch25_Dir">
+          <HDLName>aSeDir25</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch26_Dir">
+          <HDLName>aSeDir26</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch27_Dir">
+          <HDLName>aSeDir27</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch28_Dir">
+          <HDLName>aSeDir28</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch29_Dir">
+          <HDLName>aSeDir29</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch30_Dir">
+          <HDLName>aSeDir30</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch31_Dir">
+          <HDLName>aSeDir31</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch0_Rd">
+          <HDLName>aSeInput0</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch1_Rd">
+          <HDLName>aSeInput1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch2_Rd">
+          <HDLName>aSeInput2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch3_Rd">
+          <HDLName>aSeInput3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch4_Rd">
+          <HDLName>aSeInput4</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch5_Rd">
+          <HDLName>aSeInput5</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch6_Rd">
+          <HDLName>aSeInput6</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch7_Rd">
+          <HDLName>aSeInput7</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch8_Rd">
+          <HDLName>aSeInput8</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch9_Rd">
+          <HDLName>aSeInput9</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch10_Rd">
+          <HDLName>aSeInput10</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch11_Rd">
+          <HDLName>aSeInput11</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch12_Rd">
+          <HDLName>aSeInput12</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch13_Rd">
+          <HDLName>aSeInput13</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch14_Rd">
+          <HDLName>aSeInput14</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch15_Rd">
+          <HDLName>aSeInput15</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch16_Rd">
+          <HDLName>aSeInput16</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch17_Rd">
+          <HDLName>aSeInput17</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch18_Rd">
+          <HDLName>aSeInput18</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch19_Rd">
+          <HDLName>aSeInput19</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch20_Rd">
+          <HDLName>aSeInput20</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch21_Rd">
+          <HDLName>aSeInput21</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch22_Rd">
+          <HDLName>aSeInput22</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch23_Rd">
+          <HDLName>aSeInput23</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch24_Rd">
+          <HDLName>aSeInput24</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch25_Rd">
+          <HDLName>aSeInput25</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch26_Rd">
+          <HDLName>aSeInput26</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch27_Rd">
+          <HDLName>aSeInput27</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch28_Rd">
+          <HDLName>aSeInput28</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch29_Rd">
+          <HDLName>aSeInput29</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch30_Rd">
+          <HDLName>aSeInput30</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch31_Rd">
+          <HDLName>aSeInput31</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch0_Wr">
+          <HDLName>aSeOutput0</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch1_Wr">
+          <HDLName>aSeOutput1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch2_Wr">
+          <HDLName>aSeOutput2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch3_Wr">
+          <HDLName>aSeOutput3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch4_Wr">
+          <HDLName>aSeOutput4</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch5_Wr">
+          <HDLName>aSeOutput5</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch6_Wr">
+          <HDLName>aSeOutput6</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch7_Wr">
+          <HDLName>aSeOutput7</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch8_Wr">
+          <HDLName>aSeOutput8</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch9_Wr">
+          <HDLName>aSeOutput9</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch10_Wr">
+          <HDLName>aSeOutput10</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch11_Wr">
+          <HDLName>aSeOutput11</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch12_Wr">
+          <HDLName>aSeOutput12</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch13_Wr">
+          <HDLName>aSeOutput13</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch14_Wr">
+          <HDLName>aSeOutput14</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch15_Wr">
+          <HDLName>aSeOutput15</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch16_Wr">
+          <HDLName>aSeOutput16</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch17_Wr">
+          <HDLName>aSeOutput17</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch18_Wr">
+          <HDLName>aSeOutput18</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch19_Wr">
+          <HDLName>aSeOutput19</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch20_Wr">
+          <HDLName>aSeOutput20</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch21_Wr">
+          <HDLName>aSeOutput21</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch22_Wr">
+          <HDLName>aSeOutput22</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch23_Wr">
+          <HDLName>aSeOutput23</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch24_Wr">
+          <HDLName>aSeOutput24</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch25_Wr">
+          <HDLName>aSeOutput25</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch26_Wr">
+          <HDLName>aSeOutput26</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch27_Wr">
+          <HDLName>aSeOutput27</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch28_Wr">
+          <HDLName>aSeOutput28</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch29_Wr">
+          <HDLName>aSeOutput29</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch30_Wr">
+          <HDLName>aSeOutput30</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_Ch31_Wr">
+          <HDLName>aSeOutput31</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_PFI1_Dir">
+          <HDLName>aSePFIDir1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_PFI2_Dir">
+          <HDLName>aSePFIDir2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_PFI3_Dir">
+          <HDLName>aSePFIDir3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_PFI1_Rd">
+          <HDLName>aSePFIInput1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_PFI2_Rd">
+          <HDLName>aSePFIInput2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_PFI3_Rd">
+          <HDLName>aSePFIInput3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_PFI1_Wr">
+          <HDLName>aSePFIOutput1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_PFI2_Wr">
+          <HDLName>aSePFIOutput2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_PFI3_Wr">
+          <HDLName>aSePFIOutput3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_ClockOut">
+          <HDLName>SeClkOut</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>clock</SignalType>
+          <FreqInHertz>
+            <Min>100</Min>
+            <Max>200M</Max>
+          </FreqInHertz>
+        </Signal>
+        <Signal Name="SE_ClockOut_Invert">
+          <HDLName>aSeClkOutInvert</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="SE_ClockOut_En">
+          <HDLName>aSeClkOutEn</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch0_Dir">
+          <HDLName>aLvdsDir0</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch1_Dir">
+          <HDLName>aLvdsDir1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch2_Dir">
+          <HDLName>aLvdsDir2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch3_Dir">
+          <HDLName>aLvdsDir3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch4_Dir">
+          <HDLName>aLvdsDir4</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch5_Dir">
+          <HDLName>aLvdsDir5</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch6_Dir">
+          <HDLName>aLvdsDir6</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch7_Dir">
+          <HDLName>aLvdsDir7</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch8_Dir">
+          <HDLName>aLvdsDir8</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch9_Dir">
+          <HDLName>aLvdsDir9</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch10_Dir">
+          <HDLName>aLvdsDir10</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch11_Dir">
+          <HDLName>aLvdsDir11</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch12_Dir">
+          <HDLName>aLvdsDir12</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch13_Dir">
+          <HDLName>aLvdsDir13</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch14_Dir">
+          <HDLName>aLvdsDir14</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch15_Dir">
+          <HDLName>aLvdsDir15</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch0_Rd">
+          <HDLName>aLvdsInput0</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch1_Rd">
+          <HDLName>aLvdsInput1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch2_Rd">
+          <HDLName>aLvdsInput2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch3_Rd">
+          <HDLName>aLvdsInput3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch4_Rd">
+          <HDLName>aLvdsInput4</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch5_Rd">
+          <HDLName>aLvdsInput5</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch6_Rd">
+          <HDLName>aLvdsInput6</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch7_Rd">
+          <HDLName>aLvdsInput7</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch8_Rd">
+          <HDLName>aLvdsInput8</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch9_Rd">
+          <HDLName>aLvdsInput9</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch10_Rd">
+          <HDLName>aLvdsInput10</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch11_Rd">
+          <HDLName>aLvdsInput11</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch12_Rd">
+          <HDLName>aLvdsInput12</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch13_Rd">
+          <HDLName>aLvdsInput13</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch14_Rd">
+          <HDLName>aLvdsInput14</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch15_Rd">
+          <HDLName>aLvdsInput15</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch0_Wr">
+          <HDLName>aLvdsOutput0</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch1_Wr">
+          <HDLName>aLvdsOutput1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch2_Wr">
+          <HDLName>aLvdsOutput2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch3_Wr">
+          <HDLName>aLvdsOutput3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch4_Wr">
+          <HDLName>aLvdsOutput4</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch5_Wr">
+          <HDLName>aLvdsOutput5</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch6_Wr">
+          <HDLName>aLvdsOutput6</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch7_Wr">
+          <HDLName>aLvdsOutput7</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch8_Wr">
+          <HDLName>aLvdsOutput8</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch9_Wr">
+          <HDLName>aLvdsOutput9</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch10_Wr">
+          <HDLName>aLvdsOutput10</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch11_Wr">
+          <HDLName>aLvdsOutput11</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch12_Wr">
+          <HDLName>aLvdsOutput12</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch13_Wr">
+          <HDLName>aLvdsOutput13</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch14_Wr">
+          <HDLName>aLvdsOutput14</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_Ch15_Wr">
+          <HDLName>aLvdsOutput15</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_PFI1_Dir">
+          <HDLName>aLvdsPFIDir1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_PFI2_Dir">
+          <HDLName>aLvdsPFIDir2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_PFI3_Dir">
+          <HDLName>aLvdsPFIDir3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_PFI1_Rd">
+          <HDLName>aLvdsPFIInput1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_PFI2_Rd">
+          <HDLName>aLvdsPFIInput2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_PFI3_Rd">
+          <HDLName>aLvdsPFIInput3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_PFI1_Wr">
+          <HDLName>aLvdsPFIOutput1</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_PFI2_Wr">
+          <HDLName>aLvdsPFIOutput2</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_PFI3_Wr">
+          <HDLName>aLvdsPFIOutput3</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_ClockOut">
+          <HDLName>LvdsClkOut</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>clock</SignalType>
+          <FreqInHertz>
+            <Min>100</Min>
+            <Max>200M</Max>
+          </FreqInHertz>
+        </Signal>
+        <Signal Name="LVDS_ClockOut_Invert">
+          <HDLName>aLvdsClkOutInvert</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="LVDS_ClockOut_En">
+          <HDLName>aLvdsClkOutEn</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+        <Signal Name="Voltage_Control_Clock">
+          <HDLName>VoltageCtrlClk</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>clock</SignalType>
+          <FreqInHertz>
+            <Min>40M</Min>
+            <Max>40M</Max>
+          </FreqInHertz>
+        </Signal>
+        <Signal Name="Voltage_Family">
+          <HDLName>rVoltageFamily</HDLName>
+          <HDLType>std_logic_vector(7 downto 0)</HDLType>
+          <DataType><U8/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+          <RequiredClockDomain>Voltage_Control_Clock</RequiredClockDomain>
+        </Signal>
+        <Signal Name="Set_Voltage_Family">
+          <HDLName>rSetVoltageFamily</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+          <RequiredClockDomain>Voltage_Control_Clock</RequiredClockDomain>
+        </Signal>
+        <Signal Name="Voltage_DAC">
+          <HDLName>rVoltageDAC</HDLName>
+          <HDLType>std_logic_vector(15 downto 0)</HDLType>
+          <DataType><U16/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+          <RequiredClockDomain>Voltage_Control_Clock</RequiredClockDomain>
+        </Signal>
+        <Signal Name="Set_Voltage_DAC">
+          <HDLName>rSetVoltageDAC</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+          <RequiredClockDomain>Voltage_Control_Clock</RequiredClockDomain>
+        </Signal>
+        <Signal Name="Set_Voltage_Done">
+          <HDLName>rSetVoltageDone</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+          <RequiredClockDomain>Voltage_Control_Clock</RequiredClockDomain>
+        </Signal>
+        <Signal Name="DCM_Locked">
+          <HDLName>aDCMLocked</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+        </Signal>
+      </SignalList>
+    </Interface>
+
+    <Interface Name="Socket">
+      <InterfaceType>Socket</InterfaceType>
+      <SignalList>
+        <Signal Name="aUserGpio">
+          <HDLName>aUserGpio</HDLName>
+          <HDLType>std_logic_vector(67 downto 0)</HDLType>
+          <DataType>
+            <Array>
+              <Boolean/>
+              <Size>68</Size>
+            </Array>
+          </DataType>
+          <Direction>Bidirectional</Direction>
+        </Signal>
+        <Signal Name="aUserGpio_n">
+          <HDLName>aUserGpio_n</HDLName>
+          <HDLType>std_logic_vector(67 downto 0)</HDLType>
+          <DataType>
+            <Array>
+              <Boolean/>
+              <Size>68</Size>
+            </Array>
+          </DataType>
+          <Direction>Bidirectional</Direction>
+        </Signal>
+        <Signal Name="rIoModGpioEn">
+          <HDLName>rIoModGpioEn</HDLName>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+        </Signal>
+        <Signal Name="rClkToSocket">
+          <HDLName>rClkToSocket</HDLName>
+          <CLIPSignal>rClkToSocket</CLIPSignal>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+        </Signal>
+        <Signal Name="rLvFpgaReqI2cBus">
+          <HDLName>rLvFpgaReqI2cBus</HDLName>
+          <CLIPSignal>rLvFpgaReqI2cBus</CLIPSignal>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+        </Signal>
+        <Signal Name="rLvFpgaAckI2cBus">
+          <HDLName>rLvFpgaAckI2cBus</HDLName>
+          <CLIPSignal>rLvFpgaAckI2cBus</CLIPSignal>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+        </Signal>
+        <Signal Name="rLvFpgaI2cGo">
+          <HDLName>rLvFpgaI2cGo</HDLName>
+          <CLIPSignal>rLvFpgaI2cGo</CLIPSignal>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+        </Signal>
+        <Signal Name="rLvFpgaI2cStart">
+          <HDLName>rLvFpgaI2cStart</HDLName>
+          <CLIPSignal>rLvFpgaI2cStart</CLIPSignal>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+        </Signal>
+        <Signal Name="rLvFpgaI2cStop">
+          <HDLName>rLvFpgaI2cStop</HDLName>
+          <CLIPSignal>rLvFpgaI2cStop</CLIPSignal>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+        </Signal>
+        <Signal Name="rLvFpgaI2cRd">
+          <HDLName>rLvFpgaI2cRd</HDLName>
+          <CLIPSignal>rLvFpgaI2cRd</CLIPSignal>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>FromCLIP</Direction>
+        </Signal>
+        <Signal Name="rLvFpgaI2cAck">
+          <HDLName>rLvFpgaI2cAck</HDLName>
+          <CLIPSignal>rLvFpgaI2cAck</CLIPSignal>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+        </Signal>
+        <Signal Name="rLvFpgaI2cDone">
+          <HDLName>rLvFpgaI2cDone</HDLName>
+          <CLIPSignal>rLvFpgaI2cDone</CLIPSignal>
+          <HDLType>std_logic</HDLType>
+          <DataType><Boolean/></DataType>
+          <Direction>ToCLIP</Direction>
+        </Signal>
+        <Signal Name="rLvFpgaI2cWtData">
+          <HDLName>rLvFpgaI2cWtData</HDLName>
+          <CLIPSignal>rLvFpgaI2cWtData</CLIPSignal>
+          <HDLType>std_logic_vector(7 downto 0)</HDLType>
+          <DataType>
+            <Array>
+              <Boolean/>
+              <Size>8</Size>
+            </Array>
+          </DataType>
+          <Direction>FromCLIP</Direction>
+        </Signal>
+        <Signal Name="rLvFpgaI2cRdData">
+          <HDLName>rLvFpgaI2cRdData</HDLName>
+          <CLIPSignal>rLvFpgaI2cRdData</CLIPSignal>
+          <HDLType>std_logic_vector(7 downto 0)</HDLType>
+          <DataType>
+            <Array>
+              <Boolean/>
+              <Size>8</Size>
+            </Array>
+          </DataType>
+          <Direction>ToCLIP</Direction>
+        </Signal>
+
+        <Signal Name="TdcAssertClk">
+          <HDLName>TdcAssertClk</HDLName>
+          <HDLType>std_logic</HDLType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+          <Description></Description>
+          <DataType>
+            <Boolean/>
+          </DataType>
+          <RequiredClockDomain></RequiredClockDomain>
+          <UseInLabVIEWSingleCycleTimedLoop>NotAllowed</UseInLabVIEWSingleCycleTimedLoop>
+        </Signal>
+        <Signal Name="tTdcAssert">
+          <HDLName>tTdcAssert</HDLName>
+          <HDLType>std_logic</HDLType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+          <Description></Description>
+          <DataType>
+            <Boolean/>
+          </DataType>
+          <RequiredClockDomain></RequiredClockDomain>
+          <UseInLabVIEWSingleCycleTimedLoop>NotAllowed</UseInLabVIEWSingleCycleTimedLoop>
+        </Signal>
+        <Signal Name="Clk100">
+          <HDLName>Clk100</HDLName>
+          <HDLType>std_logic</HDLType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+          <Description></Description>
+          <DataType>
+            <Boolean/>
+          </DataType>
+          <RequiredClockDomain></RequiredClockDomain>
+          <UseInLabVIEWSingleCycleTimedLoop>NotAllowed</UseInLabVIEWSingleCycleTimedLoop>
+        </Signal>
+        <Signal Name="c100TdcDeassert">
+          <HDLName>c100TdcDeassert</HDLName>
+          <HDLType>std_logic</HDLType>
+          <Direction>FromCLIP</Direction>
+          <SignalType>data</SignalType>
+          <Description></Description>
+          <DataType>
+            <Boolean/>
+          </DataType>
+          <RequiredClockDomain></RequiredClockDomain>
+          <UseInLabVIEWSingleCycleTimedLoop>NotAllowed</UseInLabVIEWSingleCycleTimedLoop>
+        </Signal>
+        <Signal Name="rTdcPulseWidth">
+          <HDLName>rTdcPulseWidth</HDLName>
+          <HDLType>std_logic_vector(15 downto 0)</HDLType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+          <Description></Description>
+          <DataType>
+            <Array>
+              <Boolean/>
+              <Size>16</Size>
+            </Array>
+          </DataType>
+          <RequiredClockDomain></RequiredClockDomain>
+          <UseInLabVIEWSingleCycleTimedLoop>NotAllowed</UseInLabVIEWSingleCycleTimedLoop>
+        </Signal>
+        <Signal Name="rTdcPulseWidthValid">
+          <HDLName>rTdcPulseWidthValid</HDLName>
+          <HDLType>std_logic</HDLType>
+          <Direction>ToCLIP</Direction>
+          <SignalType>data</SignalType>
+          <Description></Description>
+          <DataType>
+            <Boolean/>
+          </DataType>
+          <RequiredClockDomain></RequiredClockDomain>
+          <UseInLabVIEWSingleCycleTimedLoop>NotAllowed</UseInLabVIEWSingleCycleTimedLoop>
+        </Signal>
+
+      </SignalList>
+    </Interface>
+	
+  </InterfaceList>
+</CLIPDeclaration>
