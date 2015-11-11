@@ -1,0 +1,90 @@
+
+*** Running vivado
+    with args -log tb_NiFpgaSimulationModel.rds -m64 -mode batch -messageDb vivado.pb -source tb_NiFpgaSimulationModel.tcl
+
+
+****** Vivado v2013.4_(AR59519_AR59812_AR59814_AR60501) (64-bit)
+  **** SW Build 353583 on Mon Dec  9 17:49:19 MST 2013
+  **** IP Build 208076 on Mon Dec  2 12:38:17 MST 2013
+    ** Copyright 1986-1999, 2001-2013 Xilinx, Inc. All Rights Reserved.
+
+Attempting to get a license: Implementation
+WARNING: [Common 17-301] Failed to get a license: Implementation
+WARNING: [Vivado 15-19] WARNING: No 'Implementation' license found. This message may be safely ignored if a Vivado WebPACK or device-locked license, common for board kits, will be used during implementation.
+
+Attempting to get a license: Synthesis
+WARNING: [Common 17-301] Failed to get a license: Synthesis
+Loading parts and site information from C:/NIFPGA/programs/Vivado2013_4/data/parts/arch.xml
+Parsing RTL primitives file [C:/NIFPGA/programs/Vivado2013_4/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [C:/NIFPGA/programs/Vivado2013_4/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+WARNING: [Common 17-376] Your XILINX_EDK environment variable is undefined. You may not be able to run some features properly. Please set up your XILINX_EDK environment to get full functionality.
+source tb_NiFpgaSimulationModel.tcl
+# set_param gui.test TreeTableDev
+# set_msg_config -id {HDL 9-1061} -limit 100000
+# set_msg_config -id {HDL 9-1654} -limit 100000
+# create_project -in_memory -part xc7vx485tffg1157-1
+# set_property target_language Verilog [current_project]
+# set_param project.compositeFile.enableAutoGeneration 0
+# read_vhdl C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd
+# set_param synth.vivado.isSynthRun true
+# set_property webtalk.parent_dir C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.data/wt [current_project]
+# set_property parent.project_dir C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY [current_project]
+# synth_design -top tb_NiFpgaSimulationModel -part xc7vx485tffg1157-1
+Command: synth_design -top tb_NiFpgaSimulationModel -part xc7vx485tffg1157-1
+
+Starting synthesis...
+
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7vx485t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7vx485t'
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 230.609 ; gain = 83.801
+---------------------------------------------------------------------------------
+ERROR: [Synth 8-4169] error in use clause: package 'pkgregister' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:90]
+ERROR: [Synth 8-4169] error in use clause: package 'pkgnifpgasimcommonprocedures' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:91]
+ERROR: [Synth 8-4169] error in use clause: package 'pkgnifpgasimcontrolandindicatorprocedures' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:92]
+ERROR: [Synth 8-4169] error in use clause: package 'pkgnifpgasimfifoprocedures' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:93]
+ERROR: [Synth 8-4169] error in use clause: package 'pkgnifpgasimirqprocedures' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:94]
+ERROR: [Synth 8-4169] error in use clause: package 'pkgnifpgasimmiscprocedures' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:95]
+ERROR: [Synth 8-4169] error in use clause: package 'pkgnifpgasiminterfacetypes' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:96]
+ERROR: [Synth 8-4169] error in use clause: package 'pkgnifpgasiminterfacelvdatatypes' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:97]
+ERROR: [Synth 8-4169] error in use clause: package 'pkgnifpgasimulationmodel' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:98]
+ERROR: [Synth 8-4169] error in use clause: package 'pkgnifpgasimusertypes' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:99]
+ERROR: [Synth 8-4169] error in use clause: package 'pkgniutilities' not found in library 'nifpga' [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:100]
+INFO: [Synth 8-2810] unit tb_nifpgasimulationmodel ignored due to previous errors [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:102]
+ERROR: [Synth 8-1940] entity tb_nifpgasimulationmodel is not yet compiled [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:105]
+ERROR: [Synth 8-1031] tdiagramclocks is not declared [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:107]
+ERROR: [Synth 8-1031] std_logic is not declared [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:108]
+ERROR: [Synth 8-1031] boolean is not declared [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:109]
+ERROR: [Synth 8-1031] tfiinterface is not declared [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:111]
+ERROR: [Synth 8-1031] boolean is not declared [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:112]
+ERROR: [Synth 8-1031] tfiinterface is not declared [C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.srcs/sources_1/imports/user/tb_NiFpgaSimulationModel.vhd:113]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 262.043 ; gain = 115.234
+---------------------------------------------------------------------------------
+synthesize failed
+    while executing
+"rt::run_synthesis -module $rt::top"
+    invoked from within
+"if {$rt::useElabCache == false} {
+      rt::run_synthesis -module $rt::top
+    }"
+    ("uplevel" body line 31)
+    invoked from within
+"uplevel #0 {
+    set ::env(BUILTIN_SYNTH) true
+    source $::env(HRT_TCL_PATH)/rtSynthPrep.tcl
+    set rt::cmdEcho 0
+    rt::set_parameter writeXmsg t..."
+ERROR: [Common 17-39] 'source' failed due to earlier errors.
+INFO: [Common 17-83] Releasing license: Synthesis
+3 Infos, 0 Warnings, 0 Critical Warnings and 18 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Vivado Synthesis failed
+ERROR: [Common 17-39] 'source' failed due to earlier errors.
+
+    while executing
+"source -notrace {./.Xil/Vivado-1148-/realtime\tb_NiFpgaSimulationModel.tcl}"
+    invoked from within
+"synth_design -top tb_NiFpgaSimulationModel -part xc7vx485tffg1157-1"
+    (file "tb_NiFpgaSimulationModel.tcl" line 15)
+INFO: [Common 17-206] Exiting Vivado at Mon Nov 09 11:42:24 2015...

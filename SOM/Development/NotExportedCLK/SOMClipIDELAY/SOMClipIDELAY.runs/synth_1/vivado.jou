@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# Vivado v2013.4_(AR59519_AR59812_AR59814_AR60501) (64-bit)
+# SW Build 353583 on Mon Dec  9 17:49:19 MST 2013
+# IP Build 208076 on Mon Dec  2 12:38:17 MST 2013
+# Start of session at: Mon Nov 09 11:42:17 2015
+# Process ID: 1148
+# Log file: C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.runs/synth_1/tb_NiFpgaSimulationModel.rds
+# Journal file: C:/Users/kvemishe/Documents/XRAYDetector/SOM/Development/NotExportedCLK/SOMClipIDELAY/SOMClipIDELAY.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source tb_NiFpgaSimulationModel.tcl

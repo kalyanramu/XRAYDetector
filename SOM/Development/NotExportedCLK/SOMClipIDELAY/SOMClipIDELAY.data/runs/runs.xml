@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<Runs Version="1" Minor="9">
+	<Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7vx485tffg1157-1" LaunchPart="xc7vx485tffg1157-1" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current" Dir="$PRUNDIR/synth_1" LaunchTime="1447090935">
+		<File Type="RDS-UTIL" Name="tb_NiFpgaSimulationModel_utilization_synth.rpt"/>
+		<File Type="RUN-STRAT" Name="$PDATADIR/runs/synth_1/synth_1.psg"/>
+		<File Type="RDS-UTIL-PB" Name="tb_NiFpgaSimulationModel_utilization_synth.pb"/>
+		<File Type="RDS-DCP" Name="tb_NiFpgaSimulationModel.dcp"/>
+		<File Type="VDS-TIMINGSUMMARY" Name="tb_NiFpgaSimulationModel_timing_summary_synth.rpt"/>
+		<File Type="VDS-TIMING-PB" Name="tb_NiFpgaSimulationModel_timing_summary_synth.pb"/>
+		<File Type="PA-TCL" Name="tb_NiFpgaSimulationModel.tcl"/>
+		<File Type="RUN-SRCS" Name="$PDATADIR/runs/synth_1/sources.xml"/>
+		<File Type="RDS-RDS" Name="tb_NiFpgaSimulationModel.rds"/>
+		<File Type="RUN-CONSTRS" Name="$PDATADIR/runs/synth_1/constrs_in.xml"/>
+	</Run>
+	<Run Id="impl_1" Type="Ft2:EntireDesign" SynthRun="synth_1" Part="xc7vx485tffg1157-1" LaunchPart="xc7vx485tffg1157-1" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" Dir="$PRUNDIR/impl_1" LaunchTime="1447090935">
+		<File Type="RUN-STRAT" Name="$PDATADIR/runs/impl_1/impl_1.psg"/>
+		<File Type="OPT-DRC" Name="tb_NiFpgaSimulationModel_drc_opted.rpt"/>
+		<File Type="PLACE-IO" Name="tb_NiFpgaSimulationModel_io_placed.rpt"/>
+		<File Type="PLACE-CLK" Name="tb_NiFpgaSimulationModel_clock_utilization_placed.rpt"/>
+		<File Type="PLACE-UTIL" Name="tb_NiFpgaSimulationModel_utilization_placed.rpt"/>
+		<File Type="PLACE-UTIL-PB" Name="tb_NiFpgaSimulationModel_utilization_placed.pb"/>
+		<File Type="PLACE-CTRL" Name="tb_NiFpgaSimulationModel_control_sets_placed.rpt"/>
+		<File Type="PLACE-SIMILARITY" Name="tb_NiFpgaSimulationModel_incremental_reuse_placed.rpt"/>
+		<File Type="PLACE-PRE-SIMILARITY" Name="tb_NiFpgaSimulationModel_incremental_reuse_pre_placed.rpt"/>
+		<File Type="PA-TCL" Name="tb_NiFpgaSimulationModel.tcl"/>
+		<File Type="ROUTE-DRC" Name="tb_NiFpgaSimulationModel_drc_routed.rpt"/>
+		<File Type="ROUTE-DRC-PB" Name="tb_NiFpgaSimulationModel_drc_routed.pb"/>
+		<File Type="ROUTE-PWR" Name="tb_NiFpgaSimulationModel_power_routed.rpt"/>
+		<File Type="ROUTE-PWR-SUM" Name="tb_NiFpgaSimulationModel_power_summary_routed.pb"/>
+		<File Type="ROUTE-STATUS" Name="tb_NiFpgaSimulationModel_route_status.rpt"/>
+		<File Type="ROUTE-STATUS-PB" Name="tb_NiFpgaSimulationModel_route_status.pb"/>
+		<File Type="ROUTE-DCP" Name="tb_NiFpgaSimulationModel_routed.dcp"/>
+		<File Type="ROUTE-TIMINGSUMMARY" Name="tb_NiFpgaSimulationModel_timing_summary_routed.rpt"/>
+		<File Type="ROUTE-TIMING-PB" Name="tb_NiFpgaSimulationModel_timing_summary_routed.pb"/>
+		<File Type="ROUTE-SIMILARITY" Name="tb_NiFpgaSimulationModel_incremental_reuse_routed.rpt"/>
+		<File Type="OPT-DCP" Name="tb_NiFpgaSimulationModel_opt.dcp"/>
+		<File Type="RDI-RDI" Name="tb_NiFpgaSimulationModel.rdi"/>
+		<File Type="PLACE-DCP" Name="tb_NiFpgaSimulationModel_placed.dcp"/>
+		<File Type="PWROPT-DCP" Name="tb_NiFpgaSimulationModel_pwropt.dcp"/>
+		<File Type="POSTPLACE-PWROPT-DCP" Name="tb_NiFpgaSimulationModel_postplace_pwropt.dcp"/>
+		<File Type="PWROPT-DRC" Name="tb_NiFpgaSimulationModel_drc_pwropted.rpt"/>
+		<File Type="PHYSOPT-DCP" Name="tb_NiFpgaSimulationModel_physopt.dcp"/>
+		<File Type="PHYSOPT-DRC" Name="tb_NiFpgaSimulationModel_drc_physopted.rpt"/>
+		<File Type="BG-BIT" Name="tb_NiFpgaSimulationModel.bit"/>
+		<File Type="BG-DRC" Name="tb_NiFpgaSimulationModel.drc"/>
+		<File Type="BG-BGN" Name="tb_NiFpgaSimulationModel.bgn"/>
+		<File Type="BG-BIN" Name="tb_NiFpgaSimulationModel.bin"/>
+		<File Type="BITSTR-MSK" Name="tb_NiFpgaSimulationModel.msk"/>
+		<File Type="BITSTR-RBT" Name="tb_NiFpgaSimulationModel.rbt"/>
+		<File Type="BITSTR-NKY" Name="tb_NiFpgaSimulationModel.nky"/>
+		<File Type="BITSTR-BMM" Name="tb_NiFpgaSimulationModel_bd.bmm"/>
+		<File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+		<File Type="RUN-CONSTRS" Name="$PDATADIR/runs/impl_1/constrs_in.xml"/>
+	</Run>
+</Runs>
+

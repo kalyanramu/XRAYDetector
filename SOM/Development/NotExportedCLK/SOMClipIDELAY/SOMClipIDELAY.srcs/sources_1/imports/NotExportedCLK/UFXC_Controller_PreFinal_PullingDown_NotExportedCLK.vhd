@@ -10,6 +10,9 @@ library work;
 library UNISIM;
   use UNISIM.vcomponents.all;
 
+
+--- Lines to IDLEAY (Total Count = 16)
+--  DIO: 30, 31, 35, 53, 55, 59, 60, 62, 63, 76, 77, 79, 80, 83, 85, 86 (Configured as LVDS)
 entity UFXC_Controller_PreFinal_PullingDown_NotExportedCLK is
   port(
     ---------------------------------------------------------------
@@ -918,7 +921,61 @@ entity UFXC_Controller_PreFinal_PullingDown_NotExportedCLK is
     aSerial3Irq : out std_logic;
     aSerial4Irq : out std_logic;
     aSerial5Irq : out std_logic;
-    aSerial6Irq : out std_logic
+    aSerial6Irq : out std_logic;
+    
+    	
+	-------------------------------------
+	-- IDELAY Increment Lines
+	-- Author: Kalyan
+	-------------------------------------
+	
+	aDio_Idelay_Inc_30 : in std_logic;
+	aDio_Idelay_Inc_31 : in std_logic;
+	aDio_Idelay_Inc_35 : in std_logic;
+	aDio_Idelay_Inc_53 : in std_logic;
+	aDio_Idelay_Inc_55 : in std_logic;
+	aDio_Idelay_Inc_59 : in std_logic;
+	aDio_Idelay_Inc_60 : in std_logic;
+	aDio_Idelay_Inc_62 : in std_logic;
+	aDio_Idelay_Inc_63 : in std_logic;
+	aDio_Idelay_Inc_76 : in std_logic;
+	aDio_Idelay_Inc_77 : in std_logic;
+	aDio_Idelay_Inc_79 : in std_logic;
+	aDio_Idelay_Inc_80 : in std_logic;
+	aDio_Idelay_Inc_83 : in std_logic;
+	aDio_Idelay_Inc_85 : in std_logic;
+	aDio_Idelay_Inc_86 : in std_logic;
+	
+    -----------------------------------
+    -- IDELAY Count Out Lines
+    -- Author: Kalyan
+    -----------------------------------
+
+	aDio_Idelay_Count_Out_30 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_31 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_35 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_53 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_55 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_59 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_60 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_62 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_63 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_76 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_77 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_79 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_80 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_83 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_85 : out std_logic_vector(4 downto 0);
+	aDio_Idelay_Count_Out_86 : out std_logic_vector(4 downto 0);
+
+	-----------------------------------------------------------
+	-- Common Idelay Lines
+	-- Author: Kalyan
+	-----------------------------------------------------------
+	iIdelayReset	: in std_logic;
+	iIdelayClk      : in std_logic;
+	iDelayCtrlRst   : in std_logic;
+	Clk200          : in std_logic;
 
   );
 
@@ -945,6 +1002,63 @@ architecture RTL of UFXC_Controller_PreFinal_PullingDown_NotExportedCLK is
   -- explicitly instantiate a BUFG and compensate the PLL phase.
   attribute dont_touch : string;
   attribute dont_touch of Eth2GmiiTxClkDly : signal is "true";
+  
+  ---------------------------------------------------------------
+  -- IDELAY Attributes
+  ---------------------------------------------------------------
+  -- IdelayCtrl Attribute
+-- Author:Kalyan
+-- Date: 11/04/2015
+ attribute IODELAY_GROUP : string;
+ attribute IODELAY_GROUP of iIdelayController : label is "NI9651IdelayGroup";
+  
+  ----------------------------------------------------------------
+  -- IDELAYCTRL Component
+  ----------------------------------------------------------------
+  
+  component idelayctrl
+    port (
+      RDY : out std_logic;
+      REFCLK : in std_logic;
+      RST : in std_logic);
+  end component;
+  
+  ----------------------------------------------------------------
+  --- IDELAYE2 Component
+  ----------------------------------------------------------------
+  component IDELAYE2
+    generic (
+      CINVCTRL_SEL : string := "FALSE";
+      DELAY_SRC : string := "IDATAIN";
+      HIGH_PERFORMANCE_MODE : string := "FALSE";
+      IDELAY_TYPE : string := "FIXED";
+      IDELAY_VALUE : integer := 0;
+      PIPE_SEL : string := "FALSE";
+      REFCLK_FREQUENCY : REAL := 200.0;
+      SIGNAL_PATTERN : string := "DATA");
+    port (
+      C : in STD_LOGIC;
+      CE : in STD_LOGIC;
+      CINVCTRL : in STD_LOGIC;
+      CNTVALUEIN : in STD_LOGIC_VECTOR(4 downto 0);
+      CNTVALUEOUT : out STD_LOGIC_VECTOR(4 downto 0);
+      DATAIN : in STD_LOGIC;
+      DATAOUT : out STD_LOGIC;
+      IDATAIN : in STD_LOGIC;
+      INC : in STD_LOGIC;
+      LD : in STD_LOGIC;
+      LDPIPEEN : in STD_LOGIC;
+      REGRST : in STD_LOGIC);
+  end component;
+  
+  ------------------------------------------------------------
+  -- IDELAY Signals
+  -- Author: Kalyan
+  ------------------------------------------------------------
+  	signal aDio_Idelay_Inc			: std_logic_vector(87 down to 0);
+	signal aDio_Idelay_Count_Out   : std_logic_vector(87 down to 0);
+	signal aDio_Idelay_Out         : std_logic_vector(87 down to 0);
+	signal aDio_Idelay_In          : std_logic_vector(87 down to 0);
 
   ---------------------------------------------------------------
   -- I/O Signals
@@ -2340,25 +2454,7 @@ begin
 
   aDio_in(29) <= aDio_out(29);
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_30
-  ---------------------------------------------------------------
-  IOBUF_30 : IBUFDS
-  port map (
-    O   => aDio_in(30),
-    I   => aDio(30),
-    IB  => aDio_n(30));
-
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_31
-  ---------------------------------------------------------------
-  IOBUF_31 : IBUFDS
-  port map (
-    O   => aDio_in(31),
-    I   => aDio(31),
-    IB  => aDio_n(31));
-
-  ---------------------------------------------------------------
+--------------------
   --I/O Buffer: DIO_32
   ---------------------------------------------------------------
   IOBUF_32 : OBUFT
@@ -2412,14 +2508,7 @@ begin
 
   aDio_in(34) <= aDio_out(34);
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_35
-  ---------------------------------------------------------------
-  IOBUF_35 : IBUFDS
-  port map (
-    O   => aDio_in(35),
-    I   => aDio(35),
-    IB  => aDio_n(35));
+
 
   ---------------------------------------------------------------
   --I/O Buffer: DIO_36
@@ -2766,14 +2855,6 @@ begin
 
   aDio_n_in(52) <= aDio_n_out(52);
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_53
-  ---------------------------------------------------------------
-  IOBUF_53 : IBUFDS
-  port map (
-    O   => aDio_in(53),
-    I   => aDio(53),
-    IB  => aDio_n(53));
 
   ---------------------------------------------------------------
   --I/O Buffer: DIO_54
@@ -2787,14 +2868,7 @@ begin
 
   aDio_in(54) <= aDio_out(54);
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_55
-  ---------------------------------------------------------------
-  IOBUF_55 : IBUFDS
-  port map (
-    O   => aDio_in(55),
-    I   => aDio(55),
-    IB  => aDio_n(55));
+
 
   ---------------------------------------------------------------
   --I/O Buffer: DIO_56
@@ -2832,23 +2906,7 @@ begin
 
   aDio_in(58) <= aDio_out(58);
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_59
-  ---------------------------------------------------------------
-  IOBUF_59 : IBUFDS
-  port map (
-    O   => aDio_in(59),
-    I   => aDio(59),
-    IB  => aDio_n(59));
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_60
-  ---------------------------------------------------------------
-  IOBUF_60 : IBUFDS
-  port map (
-    O   => aDio_in(60),
-    I   => aDio(60),
-    IB  => aDio_n(60));
 
   ---------------------------------------------------------------
   --I/O Buffer: DIO_61
@@ -2862,24 +2920,7 @@ begin
 
   aDio_in(61) <= aDio_out(61);
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_62
-  ---------------------------------------------------------------
-  IOBUF_62 : IBUFDS
-  port map (
-    O   => aDio_in(62),
-    I   => aDio(62),
-    IB  => aDio_n(62));
-
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_63
-  ---------------------------------------------------------------
-  IOBUF_63 : IBUFDS
-  port map (
-    O   => aDio_in(63),
-    I   => aDio(63),
-    IB  => aDio_n(63));
-
+ 
   ---------------------------------------------------------------
   --I/O Buffer: DIO_64
   ---------------------------------------------------------------
@@ -3140,23 +3181,7 @@ begin
 
   aDio_n_in(75) <= aDio_n_out(75);
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_76
-  ---------------------------------------------------------------
-  IOBUF_76 : IBUFDS
-  port map (
-    O   => aDio_in(76),
-    I   => aDio(76),
-    IB  => aDio_n(76));
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_77
-  ---------------------------------------------------------------
-  IOBUF_77 : IBUFDS
-  port map (
-    O   => aDio_in(77),
-    I   => aDio(77),
-    IB  => aDio_n(77));
 
   ---------------------------------------------------------------
   --I/O Buffer: DIO_78
@@ -3179,24 +3204,6 @@ begin
     T  => aDio_n_enable_n(78));
 
   aDio_n_in(78) <= aDio_n_out(78);
-
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_79
-  ---------------------------------------------------------------
-  IOBUF_79 : IBUFDS
-  port map (
-    O   => aDio_in(79),
-    I   => aDio(79),
-    IB  => aDio_n(79));
-
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_80
-  ---------------------------------------------------------------
-  IOBUF_80 : IBUFDS
-  port map (
-    O   => aDio_in(80),
-    I   => aDio(80),
-    IB  => aDio_n(80));
 
   ---------------------------------------------------------------
   --I/O Buffer: DIO_81
@@ -3232,14 +3239,7 @@ begin
 
   aDio_in(82) <= aDio_out(82);
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_83
-  ---------------------------------------------------------------
-  IOBUF_83 : IBUFDS
-  port map (
-    O   => aDio_in(83),
-    I   => aDio(83),
-    IB  => aDio_n(83));
+
 
   ---------------------------------------------------------------
   --I/O Buffer: DIO_84
@@ -3263,23 +3263,6 @@ begin
 
   aDio_n_in(84) <= aDio_n_out(84);
 
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_85
-  ---------------------------------------------------------------
-  IOBUF_85 : IBUFDS
-  port map (
-    O   => aDio_in(85),
-    I   => aDio(85),
-    IB  => aDio_n(85));
-
-  ---------------------------------------------------------------
-  --I/O Buffer: DIO_86
-  ---------------------------------------------------------------
-  IOBUF_86 : IBUFDS
-  port map (
-    O   => aDio_in(86),
-    I   => aDio(86),
-    IB  => aDio_n(86));
 
   ---------------------------------------------------------------
   --I/O Buffer: DIO_87
@@ -3303,7 +3286,258 @@ begin
 
   aDio_n_in(87) <= aDio_n_out(87);
 
+-- ************Start of Customized Code**********************************
+ -------------------------------------------------------------------
 
+ 
+ 
+ -------------------------------------------------------------------
+ -- Rename LVDS Buffer Outputs for the DIO Lines of interest
+ -- Author: Kalyan
+ -------------------------------------------------------------------
+  ---------------------------------------------------------------
+  --I/O Buffer: DIO_30
+  ---------------------------------------------------------------
+  IOBUF_30 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(30),
+    I   => aDio(30),
+    IB  => aDio_n(30));
 
+  ---------------------------------------------------------------
+  --I/O Buffer: DIO_31
+  ---------------------------------------------------------------
+  IOBUF_31 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(31),
+    I   => aDio(31),
+    IB  => aDio_n(31));
+
+  -------------------------------------------
+  
+    ---------------------------------------------------------------
+  --I/O Buffer: DIO_35
+  ---------------------------------------------------------------
+  IOBUF_35 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(35),
+    I   => aDio(35),
+    IB  => aDio_n(35));
+    
+      ---------------------------------------------------------------
+  --I/O Buffer: DIO_53
+  ---------------------------------------------------------------
+  IOBUF_53 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(53),
+    I   => aDio(53),
+    IB  => aDio_n(53));
+    
+     ---------------------------------------------------------------
+  --I/O Buffer: DIO_55
+  ---------------------------------------------------------------
+  IOBUF_55 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(55),
+    I   => aDio(55),
+    IB  => aDio_n(55));
+    
+   ---------------------------------------------------------------
+  --I/O Buffer: DIO_59
+  ---------------------------------------------------------------
+  IOBUF_59 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(59),
+    I   => aDio(59),
+    IB  => aDio_n(59));
+ 
+   ---------------------------------------------------------------
+  --I/O Buffer: DIO_60
+  ---------------------------------------------------------------
+  IOBUF_60 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(60),
+    I   => aDio(60),
+    IB  => aDio_n(60));
+ 
+  ---------------------------------------------------------------
+  --I/O Buffer: DIO_62
+  ---------------------------------------------------------------
+  IOBUF_62 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(62),
+    I   => aDio(62),
+    IB  => aDio_n(62));
+
+  ---------------------------------------------------------------
+  --I/O Buffer: DIO_63
+  ---------------------------------------------------------------
+  IOBUF_63 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(63),
+    I   => aDio(63),
+    IB  => aDio_n(63));
+    
+      ---------------------------------------------------------------
+  --I/O Buffer: DIO_76
+  ---------------------------------------------------------------
+  IOBUF_76 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(76),
+    I   => aDio(76),
+    IB  => aDio_n(76));
+
+  ---------------------------------------------------------------
+  --I/O Buffer: DIO_77
+  ---------------------------------------------------------------
+  IOBUF_77 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(77),
+    I   => aDio(77),
+    IB  => aDio_n(77));
+    
+    ---------------------------------------------------------------
+  --I/O Buffer: DIO_79
+  ---------------------------------------------------------------
+  IOBUF_79 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(79),
+    I   => aDio(79),
+    IB  => aDio_n(79));
+
+  ---------------------------------------------------------------
+  --I/O Buffer: DIO_80
+  ---------------------------------------------------------------
+  IOBUF_80 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(80),
+    I   => aDio(80),
+    IB  => aDio_n(80));
+  
+    ---------------------------------------------------------------
+  --I/O Buffer: DIO_83
+  ---------------------------------------------------------------
+  IOBUF_83 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(83),
+    I   => aDio(83),
+    IB  => aDio_n(83));
+ 
+   ---------------------------------------------------------------
+  --I/O Buffer: DIO_85
+  ---------------------------------------------------------------
+  IOBUF_85 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(85),
+    I   => aDio(85),
+    IB  => aDio_n(85));
+
+  ---------------------------------------------------------------
+  --I/O Buffer: DIO_86
+  ---------------------------------------------------------------
+  IOBUF_86 : IBUFDS
+  port map (
+    O   => aDio_Idelay_In(86),
+    I   => aDio(86),
+    IB  => aDio_n(86));
+ 
+ 
+ ------------------------------------------------------------------
+ -- Code to Preprocess the IDELAY Inputs for DIO Lines of Interest
+ -- Author: Kalyan
+ -------------------------------------------------------------------
+  aDio_Idelay_Inc(30) <= aDio_Idelay_Inc_30;
+  aDio_Idelay_Inc(31) <= aDio_Idelay_Inc_31;
+  aDio_Idelay_Inc(35) <= aDio_Idelay_Inc_35;
+  aDio_Idelay_Inc(53) <= aDio_Idelay_Inc_53;
+  aDio_Idelay_Inc(55) <= aDio_Idelay_Inc_55;
+  aDio_Idelay_Inc(59) <= aDio_Idelay_Inc_59;
+  aDio_Idelay_Inc(60) <= aDio_Idelay_Inc_60;
+  aDio_Idelay_Inc(62) <= aDio_Idelay_Inc_62;
+  aDio_Idelay_Inc(63) <= aDio_Idelay_Inc_63;
+  aDio_Idelay_Inc(76) <= aDio_Idelay_Inc_76;
+  aDio_Idelay_Inc(77) <= aDio_Idelay_Inc_77;
+  aDio_Idelay_Inc(79) <= aDio_Idelay_Inc_79;
+  aDio_Idelay_Inc(80) <= aDio_Idelay_Inc_80;
+  aDio_Idelay_Inc(83) <= aDio_Idelay_Inc_83;
+  aDio_Idelay_Inc(85) <= aDio_Idelay_Inc_85;
+  aDio_Idelay_Inc(86) <= aDio_Idelay_Inc_86;
+  
+  
+ 
+ ------------------------------------------------------------------
+ -- Code to Instantiate IDELAY Blocks for the DIO Lines of interest
+ -- Author: Kalyan
+ ------------------------------------------------------------------
+ 	
+InputDelay : for i in aDio_Idelay_in'range generate
+    -- These attributes propagate through to each instance of the Idelays
+    -- in the generate loop.  This was verified in the timing editor's NGC
+    -- viewer.
+    attribute IODELAY_GROUP : string;
+    attribute IODELAY_GROUP of iIdelaySE : label is "NI9651SEIdelayGroup";
+  begin
+  
+    iIdelaySE: IDELAYE2
+      generic map (
+        CINVCTRL_SEL          => "FALSE",     -- in  string := "FALSE"
+        DELAY_SRC             => "IDATAIN",   -- in  string := "IDATAIN"
+        HIGH_PERFORMANCE_MODE => "TRUE",      -- in  string := "FALSE"
+        IDELAY_TYPE           => "VAR_LOAD",  -- in  string := "FIXED"
+        IDELAY_VALUE          => 0,          -- in  integer := 0
+        PIPE_SEL              => "FALSE",     -- in  string := "FALSE"
+        REFCLK_FREQUENCY      => 200.0,       -- in  REAL := 200.0
+        SIGNAL_PATTERN        => "DATA")      -- in  string := "DATA"
+      port map (
+        C           => iIdelayClk,              -- in  STD_LOGIC
+        CE          => aDio_Idelay_Inc(i),            -- in  STD_LOGIC
+        CINVCTRL    => '0',                    	-- in  STD_LOGIC
+        CNTVALUEIN  => (others => '0'),        	-- in  STD_LOGIC_VECTOR(4 downto 0)
+ --       CNTVALUEOUT => iDelayTapOutVec(i),  	-- out STD_LOGIC_VECTOR(4 downto 0)
+        CNTVALUEOUT => aDio_Idelay_Count_Out(i),
+        DATAIN      => '0',                    	-- in  STD_LOGIC
+        DATAOUT     => aDio_Idelay_Out(i),      -- out STD_LOGIC
+        IDATAIN     => aDio_Idelay_In(i),       -- in  STD_LOGIC
+        INC         => (others => '1'),       -- in  STD_LOGIC
+        LD          => iIdelayReset,           	-- in  STD_LOGIC
+        LDPIPEEN    => '0',                    	-- in  STD_LOGIC
+        REGRST      => iIdelayReset);           -- in  STD_LOGIC
+        
+  end generate InputDelay;
+  
+  ----------------------------------------------------------------------------
+  -- IDELAY calibration (Added Code)
+  -- Author: Kalyan
+  -- Date: 10/20/2015
+  
+  ----------------------------------------------------------------------------       
+  iIdelayController: idelayctrl
+    port map (
+      RDY    => open,      -- out std_logic
+      REFCLK => Clk200,    -- in  std_logic
+      RST    => idelayCtrlRst); -- in  std_logic
+      
+  
+ 
+ ------------------------------------------------------------------
+ -- Code to post-process IDELAY Outputs for the DIO Lines of interest
+ -- Author: Kalyan
+ ------------------------------------------------------------------
+ 	aDio_Idelay_Count_Out_30 <= aDio_Idelay_Count_Out(30);
+ 	aDio_Idelay_Count_Out_31 <= aDio_Idelay_Count_Out(31);
+ 	aDio_Idelay_Count_Out_35 <= aDio_Idelay_Count_Out(35);
+ 	aDio_Idelay_Count_Out_53 <= aDio_Idelay_Count_Out(53);
+ 	aDio_Idelay_Count_Out_55 <= aDio_Idelay_Count_Out(55);
+ 	aDio_Idelay_Count_Out_59 <= aDio_Idelay_Count_Out(59);
+ 	aDio_Idelay_Count_Out_60 <= aDio_Idelay_Count_Out(60);
+ 	aDio_Idelay_Count_Out_62 <= aDio_Idelay_Count_Out(62);
+ 	aDio_Idelay_Count_Out_63 <= aDio_Idelay_Count_Out(63);
+ 	aDio_Idelay_Count_Out_76 <= aDio_Idelay_Count_Out(76);
+ 	aDio_Idelay_Count_Out_77 <= aDio_Idelay_Count_Out(77);
+ 	aDio_Idelay_Count_Out_79 <= aDio_Idelay_Count_Out(79);
+ 	aDio_Idelay_Count_Out_80 <= aDio_Idelay_Count_Out(80);
+ 	aDio_Idelay_Count_Out_83 <= aDio_Idelay_Count_Out(83);
+ 	aDio_Idelay_Count_Out_85 <= aDio_Idelay_Count_Out(85);
+ 	aDio_Idelay_Count_Out_86 <= aDio_Idelay_Count_Out(86);
 
 end RTL;
